@@ -41,11 +41,11 @@ module.exports = {
     ],
   },
   plugins: [new HtmlWebpackPlugin({ template: path.join(__dirname, "..", "src", "index.html") })].concat(
-    prod ? [new MiniCssExtractPlugin({ filename: "app.css" })] : []
+    prod ? [new MiniCssExtractPlugin({ filename: "assets/css/app.min.css" })] : []
   ),
   output: {
     clean: true,
     path: path.join(__dirname, "..", "dist"),
-    filename: "bundle.js",
+    filename: "assets/js/bundle.js",
   },
 };
