@@ -1,5 +1,5 @@
-import { ITemplateNameProps } from "./TemplateName.interface";
+import { ITemplateNameProps } from "./templateName.interface";
 
-const TemplateName = ({}: ITemplateNameProps) => {};
+const templateName = ({}: ITemplateNameProps) => {};
 
-export default TemplateName;
+export default templateName;

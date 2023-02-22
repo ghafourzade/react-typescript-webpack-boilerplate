@@ -1,8 +1,10 @@
 import { createElement } from "react";
 
+import Home from "views/Home";
+
 export const routes = [
-  // {
-  //   path: "/",
-  //   element: createElement(),
-  // },
+  {
+    path: "/",
+    element: createElement(Home),
+  },
 ];
