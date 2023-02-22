@@ -77,6 +77,20 @@
         "component": ".app/cli/templates/hook/TemplateName.ts",
         "interface": ".app/cli/templates/hook/TemplateName.interface.ts"
       }
+    },
+    "store": {
+      "path": "src/stores",
+      "withStyle": false,
+      "withIndex": true,
+      "withInterface": true,
+      "withTest": false,
+      "withStory": false,
+      "withLazy": false,
+      "customTemplates": {
+        "index": ".app/cli/templates/store/index.ts",
+        "component": ".app/cli/templates/store/TemplateName.ts",
+        "interface": ".app/cli/templates/store/TemplateName.interface.ts"
+      }
     }
   }
 }
