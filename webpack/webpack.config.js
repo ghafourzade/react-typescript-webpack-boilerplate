@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const GlobImporter = require("node-sass-glob-importer");
 require("dotenv").config();
 
 const prod = process.env.NODE_ENV === "production";
@@ -35,7 +36,7 @@ module.exports = {
               },
             },
           },
-          { loader: "sass-loader" },
+          { loader: "sass-loader", options: { sassOptions: { importer: GlobImporter() } } },
         ],
       },
     ],
