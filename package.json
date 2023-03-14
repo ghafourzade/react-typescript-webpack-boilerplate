@@ -7,7 +7,7 @@
     "build": "webpack --mode=production  --node-env=production --config src/config/webpack/webpack.config.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Amir Ghafourzade",
   "license": "ISC",
   "dependencies": {
     "clsx": "^1.2.1",

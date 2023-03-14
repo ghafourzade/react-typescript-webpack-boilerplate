@@ -6,7 +6,6 @@ const GlobImporter = require("node-sass-glob-importer");
 require("dotenv").config();
 
 const prod = process.env.NODE_ENV === "production";
-const localIdentName = prod ? "[hash:base64:5]" : "[local]_[hash:base64:5]";
 
 module.exports = {
   entry: path.resolve(__dirname, "..", "..", "index.tsx"),
@@ -32,7 +31,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: localIdentName,
+                localIdentName: prod ? "[hash:base64:5]" : "[local]_[hash:base64:5]",
               },
             },
           },
@@ -43,14 +42,14 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/images/[name][ext]",
+          filename: "assets/images/[name]_[hash:5][ext][query]",
         },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/fonts/[name][ext]",
+          filename: "assets/fonts/[hash][ext][query]",
         },
       },
     ],
