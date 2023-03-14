@@ -9,7 +9,7 @@ const prod = process.env.NODE_ENV === "production";
 const localIdentName = prod ? "[hash:base64:5]" : "[local]_[hash:base64:5]";
 
 module.exports = {
-  entry: path.resolve(__dirname, "..", "src", "index.tsx"),
+  entry: path.resolve(__dirname, "..", "..", "index.tsx"),
   devServer: {
     port: process.env.PORT,
   },
@@ -22,7 +22,7 @@ module.exports = {
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: "ts-loader",
       },
       {
         test: /\.s[ac]ss$/i,
@@ -39,14 +39,28 @@ module.exports = {
           { loader: "sass-loader", options: { sassOptions: { importer: GlobImporter() } } },
         ],
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/images/[name][ext]",
+        },
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/fonts/[name][ext]",
+        },
+      },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: path.join(__dirname, "..", "src", "index.html") })].concat(
+  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, "..", "..", "index.html") })].concat(
     prod ? [new MiniCssExtractPlugin({ filename: "assets/css/app.min.css" })] : []
   ),
   output: {
     clean: true,
-    path: path.join(__dirname, "..", "dist"),
+    path: path.resolve(__dirname, "..", "..", "..", "dist"),
     filename: "assets/js/bundle.js",
   },
 };
