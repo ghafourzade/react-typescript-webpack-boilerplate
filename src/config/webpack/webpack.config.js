@@ -31,12 +31,37 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: prod ? "[hash:base64:5]" : "[local]_[hash:base64:5]",
+                localIdentName: prod
+                  ? "[hash:base64:5]"
+                  : "[local]_[hash:base64:5]",
               },
             },
           },
-          { loader: "sass-loader", options: { sassOptions: { importer: GlobImporter() } } },
+          {
+            loader: "sass-loader",
+            options: { sassOptions: { importer: GlobImporter() } },
+          },
         ],
+        include: /\.module\.s[ac]ss$$/,
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          prod ? MiniCssExtractPlugin.loader : "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[local]",
+              },
+            },
+          },
+          {
+            loader: "sass-loader",
+            options: { sassOptions: { importer: GlobImporter() } },
+          },
+        ],
+        exclude: /\.module\.s[ac]ss$$/,
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -54,8 +79,14 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, "..", "..", "index.html") })].concat(
-    prod ? [new MiniCssExtractPlugin({ filename: "assets/css/app.min.css" })] : []
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "..", "..", "index.html"),
+    }),
+  ].concat(
+    prod
+      ? [new MiniCssExtractPlugin({ filename: "assets/css/app.min.css" })]
+      : []
   ),
   output: {
     clean: true,
