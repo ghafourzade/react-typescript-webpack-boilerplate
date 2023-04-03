@@ -1,1 +1,3 @@
-export interface ITemplateNameProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+export interface ITemplateNameProps {
+  children?: React.ReactNode;
+}
