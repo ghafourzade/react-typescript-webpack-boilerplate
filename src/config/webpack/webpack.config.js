@@ -11,6 +11,7 @@ module.exports = {
   entry: path.resolve(__dirname, "..", "..", "index.tsx"),
   devServer: {
     port: process.env.PORT,
+    historyApiFallback: true,
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", "*"],
@@ -31,9 +32,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: prod
-                  ? "[hash:base64:5]"
-                  : "[local]_[hash:base64:5]",
+                localIdentName: prod ? "[hash:base64:5]" : "[local]_[hash:base64:5]",
               },
             },
           },
@@ -83,14 +82,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "..", "index.html"),
     }),
-  ].concat(
-    prod
-      ? [new MiniCssExtractPlugin({ filename: "assets/css/app.min.css" })]
-      : []
-  ),
+  ].concat(prod ? [new MiniCssExtractPlugin({ filename: "assets/css/app.min.css" })] : []),
   output: {
     clean: true,
     path: path.resolve(__dirname, "..", "..", "..", "dist"),
     filename: "assets/js/bundle.js",
+    publicPath: "/",
   },
 };
